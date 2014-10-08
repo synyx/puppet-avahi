@@ -25,7 +25,7 @@ describe 'avahi' do
         it { should contain_class('avahi::params') }
         it { should contain_class('avahi::install').that_comes_before('avahi::config') }
         it { should contain_class('avahi::config') }
-        it { should contain_class('avahi::service').that_subscribes_to('avahi::config') }
+        it { should contain_class('avahi::daemon').that_subscribes_to('avahi::config') }
 
         it { should contain_service(values[:service]) }
         it { should contain_package(values[:package]).with_ensure('present') }

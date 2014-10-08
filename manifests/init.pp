@@ -27,6 +27,6 @@ class avahi (
 
   class { 'avahi::install': } ->
   class { 'avahi::config': } ~>
-  class { 'avahi::service': } ->
+  class { 'avahi::daemon': } ->
   Class['avahi']
 }
