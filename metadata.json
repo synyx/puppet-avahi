@@ -7,6 +7,25 @@
   "source": "https://github.com/synyx/puppet-avahi",
   "project_page": "https://github.com/synyx/puppet-avahi",
   "issues_url": "https://github.com/synyx/puppet-avahi/issues",
+  "tags": [
+    "dns",
+    "mDNS",
+    "avahi"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7.6"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.7"
+    }
+  ],
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
