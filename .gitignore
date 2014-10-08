@@ -1,0 +1,15 @@
+# General
+.*.sw?
+pkg
+spec/fixtures
+.rspec_system
+.vagrant
+
+# On master, no Gemfile.lock
+Gemfile.lock
+
+# IDEs
+.idea/
+.settings/
+.classpath
+.project

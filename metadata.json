@@ -1,0 +1,16 @@
+{
+  "name": "synyx-avahi",
+  "version": "0.5.0",
+  "author": "Florian Krupicka <krupicka@synyx.de>",
+  "summary": "Install Avahi and manage mDNS configuration",
+  "license": "Apache 2.0",
+  "source": "https://github.com/synyx/puppet-avahi",
+  "project_page": "https://github.com/synyx/puppet-avahi",
+  "issues_url": "https://github.com/synyx/puppet-avahi/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ]
+}
