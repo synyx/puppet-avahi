@@ -7,7 +7,6 @@
     * [Beginning with avahi](#beginning-with-avahi)
     * [Advanced configuration](#advanced-configuration)
 4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
@@ -62,7 +61,75 @@ network interfaces
 
 ###Classes and Defined Types
 
-TBD
+####Class: `avahi`
+
+The primary class of the `avahi` module. It orchestrates the setup of the
+daemon package and it's configuration on the system. The corresponding
+configuration settings can also be looked up in the [`avahi-daemon documentation](http://avahi.org/download/avahi-daemon.conf.5.xml)
+
+**Parameters within `avahi`:**
+
+#####`avahi_hostname`
+
+This sets the default for the hostname announced via mDNS. This also becomes
+the default for service declarations that don't define a hostname themselves.
+Defaults to the value of `$::hostname` from `facter`.
+
+#####`avahi_domainname`
+
+The mDNS domain name, under which services are announced. Defaults to `local`.
+   
+#####`allow_interfaces`
+
+When given, make `avahi-daemon` only listen & broadcast on the specified interfaces.
+
+#####`deny_interfaces`
+
+When given, make `avahi-daemon` ignore the specified interfaces and not listen
+or broadcast on the given interfaces at all.
+
+
+#####`enable_reflector`
+
+When set to `true`, let `avahi-daemon` act as a mDNS repeater between all the networks,
+which it is connected to. Combined with `allow_interfaces` or `deny_interfaces`, this
+allows you to bridge, for example, mDNS announcement from a printer-only network to the
+user machine network.
+
+####Defined Type: `avahi::service`
+
+Next to the services announced by default (often DBUS-aware software), this class allows
+to explicitly announce other services via mDNS, either on the host itself or even on behalf
+of other hosts. The `title` for this defined type will be used as the human readable name.
+
+**Parameters within `avahi::service`
+
+#####`type`
+
+The type of service to be announced. This is usually corresponding to an entry in
+`/etc/protocols` and is used (in conjunction with `transport`) by mDNS browsing
+software to determine the actions available to the user.
+
+#####`port`
+
+The TCP or UDP port providing this service.
+
+#####`transport
+
+The transport protocol for this particular service. This can be either `tcp` (the default)
+or `udp`.
+
+#####`protocol`
+
+The IP protocol(s) available to reach this service. This can be either `any` (the default),
+`ipv4` (only available via IPv4) or `ipv6` (only available via IPv6).
+
+#####`hostname`
+
+The fully qualified hostname on which the service is running. This is used, when announcing
+services on behalf of another machine or device, which itself is not capable of announcing
+mDNS services to the network. If not given, the service is announced for the machine running
+`avahi-daemon` itself.
 
 ##Limitations
 
