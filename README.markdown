@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/synyx/puppet-avahi.png)](https://travis-ci.org/synyx/puppet-avahi)
+
 ####Table of Contents
 
 1. [Overview](#overview)
