@@ -5,7 +5,7 @@
 #
 class avahi::service {
 
-  service { $avahi::service_name:
+  service { $::avahi::service_name:
     ensure     => running,
     enable     => true,
     hasstatus  => true,

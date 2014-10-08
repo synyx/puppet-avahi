@@ -1,13 +1,24 @@
 require 'spec_helper'
 
+OPERATING_SYSTEMS = {
+    'Debian' => {
+        :package => 'avahi-daemon',
+        :service => 'avahi-daemon',
+    },
+    'Redhat' => {
+        :package => 'avahi',
+        :service => 'avahi',
+    }
+}
+
 describe 'avahi' do
   context 'supported operating systems' do
-    ['Debian', 'RedHat'].each do |osfamily|
+    OPERATING_SYSTEMS.each do |osfamily, values|
       describe "avahi class without any parameters on #{osfamily}" do
-        let(:params) {{ }}
-        let(:facts) {{
-          :osfamily => osfamily,
-        }}
+        let(:params) { {} }
+        let(:facts) { {
+            :osfamily => osfamily,
+        } }
 
         it { should compile.with_all_deps }
 
@@ -16,18 +27,18 @@ describe 'avahi' do
         it { should contain_class('avahi::config') }
         it { should contain_class('avahi::service').that_subscribes_to('avahi::config') }
 
-        it { should contain_service('avahi') }
-        it { should contain_package('avahi').with_ensure('present') }
+        it { should contain_service(values[:service]) }
+        it { should contain_package(values[:package]).with_ensure('present') }
       end
     end
   end
 
   context 'unsupported operating system' do
     describe 'avahi class without any parameters on Solaris/Nexenta' do
-      let(:facts) {{
-        :osfamily        => 'Solaris',
-        :operatingsystem => 'Nexenta',
-      }}
+      let(:facts) { {
+          :osfamily => 'Solaris',
+          :operatingsystem => 'Nexenta',
+      } }
 
       it { expect { should contain_package('avahi') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
     end
