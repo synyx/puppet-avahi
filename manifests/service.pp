@@ -8,7 +8,7 @@ class avahi::service {
   service { $::avahi::service_name:
     ensure     => running,
     enable     => true,
-    hasstatus  => true,
+    hasstatus  => false,
     hasrestart => true,
   }
 }
