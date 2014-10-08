@@ -4,8 +4,8 @@
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Setup - The basics of getting started with avahi](#setup)
     * [What avahi affects](#what-avahi-affects)
-    * [Setup requirements](#setup-requirements)
     * [Beginning with avahi](#beginning-with-avahi)
+    * [Advanced configuration](#advanced-configuration)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -13,48 +13,62 @@
 
 ##Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.       
+The avahi module allows to set up a mDNS responder for your local network
+and manage the announced services with simple definitions.
 
 ##Module Description
 
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
-
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
+Avahi is the most widely used implementation of Multicast DNS on Linux based
+systems. This module manages the setup & configuration of the server component
+of the Avahi toolkit.
 
 ##Setup
 
 ###What avahi affects
 
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
-
-###Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
+* Package, service & configuration files for avahi-daemon
 
 ###Beginning with avahi
 
-The very basic steps needed for a user to get the module up and running. 
+To install the Avahi daemon with default parameters
 
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+```puppet
+    class { 'avahi': }
+```
+
+The defaults – like for example the announced hostname – are determined by the
+facts provided by puppet or derived from operating system dependent facts. The
+defaults are usually sufficient for production environments, though without
+additional service definitions Avahi does not usually do much by itself.
+
+###Advanced configuration
+
+A typical use case for bigger network installations, is the ability to forward
+mDNS announcements between two or more IP networks. Since multicast DNS is
+specified to be link-local, the easiest way to do so, is to setup an Avahi
+daemon on a machine, which resides in all those networks (for example DHCP server).
+
+To make Avahi daemon forward multicast DNS between two networks on different
+network interfaces
+
+```puppet
+  class { 'avahi':
+    allow_interfaces => ['eth1', 'eth2'],
+    enable_reflector => true
+  }
+```
 
 ##Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+###Classes and Defined Types
 
-##Reference
-
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+TBD
 
 ##Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+The module is currently only tested on Debian & Puppet 3.7.
 
 ##Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-##Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+Pull requests are welcome, but right now we doubt anyone will start using it, since it is
+very limited.
