@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<!-- See avahi.service(5) for more information about this configuration file -->
+
+<service-group>
+    <name replace-wildcards="yes"><%= @title %></name>
+    <service protocol="<%= @protocol %>">
+        <type>_<%= @type %>._<%= @transport %></type>
+        <port><%= @port %></port>
+        <%- if @hostname -%>
+        <host-name><%= @hostname %></host-name>
+        <%- end -%>
+    </service>
+</service-group>
