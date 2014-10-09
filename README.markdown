@@ -104,7 +104,7 @@ Next to the services announced by default (often DBUS-aware software), this clas
 to explicitly announce other services via mDNS, either on the host itself or even on behalf
 of other hosts. The `title` for this defined type will be used as the human readable name.
 
-**Parameters within `avahi::service`
+**Parameters within `avahi::service`**
 
 #####`type`
 
