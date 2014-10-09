@@ -116,7 +116,7 @@ software to determine the actions available to the user.
 
 The TCP or UDP port providing this service.
 
-#####`transport
+#####`transport`
 
 The transport protocol for this particular service. This can be either `tcp` (the default)
 or `udp`.
