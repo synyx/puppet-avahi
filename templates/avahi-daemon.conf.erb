@@ -20,7 +20,7 @@ deny-interfaces=<% @deny_interfaces.join(', ') %>
 #use-iff-running=no
 #enable-dbus=yes
 #disallow-other-stacks=no
-#allow-point-to-point=no
+allow-point-to-point=<%= @enable_p2p ? 'yes' : 'no' %>
 #cache-entries-max=4096
 #clients-max=4096
 #objects-per-client-max=1024

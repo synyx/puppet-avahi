@@ -15,6 +15,7 @@ class avahi (
   $allow_interfaces   = [],
   $deny_interfaces    = [],
   $enable_reflector   = false,
+  $enable_p2p         = false,
   $conf_dir           = $::avahi::params::conf_dir,
   $daemon_config_file = $::avahi::params::daemon_config_file,
 ) inherits avahi::params {
@@ -24,6 +25,7 @@ class avahi (
   validate_array($allow_interfaces)
   validate_array($deny_interfaces)
   validate_bool($enable_reflector)
+  validate_bool($enable_p2p)
 
   class { 'avahi::install': } ->
   class { 'avahi::config': } ~>
