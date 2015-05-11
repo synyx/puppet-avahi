@@ -5,7 +5,9 @@
 # file!
 
 [server]
+<%- unless @avahi_hostname.empty? %>
 host-name=<%= @avahi_hostname %>
+<%- end -%>
 domain-name=<%= @avahi_domainname %>
 #browse-domains=0pointer.de, zeroconf.org
 use-ipv4=yes
