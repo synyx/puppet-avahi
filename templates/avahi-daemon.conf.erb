@@ -5,7 +5,9 @@
 # file!
 
 [server]
+<%- unless @avahi_hostname.empty? %>
 host-name=<%= @avahi_hostname %>
+<%- end -%>
 domain-name=<%= @avahi_domainname %>
 #browse-domains=0pointer.de, zeroconf.org
 use-ipv4=yes
@@ -14,13 +16,13 @@ use-ipv6=yes
 allow-interfaces=<%= @allow_interfaces.join(', ') %>
 <%- end -%>
 <%- unless @deny_interfaces.empty? %>
-deny-interfaces=<% @deny_interfaces.join(', ') %>
+deny-interfaces=<%= @deny_interfaces.join(', ') %>
 <%- end %>
 #check-response-ttl=no
 #use-iff-running=no
 #enable-dbus=yes
 #disallow-other-stacks=no
-#allow-point-to-point=no
+allow-point-to-point=<%= @enable_p2p ? 'yes' : 'no' %>
 #cache-entries-max=4096
 #clients-max=4096
 #objects-per-client-max=1024
@@ -29,7 +31,7 @@ ratelimit-interval-usec=1000000
 ratelimit-burst=1000
 
 [wide-area]
-enable-wide-area=yes
+enable-wide-area=<%= @enable_wide_area ? 'yes' : 'no' %>
 
 [publish]
 #disable-publishing=no
