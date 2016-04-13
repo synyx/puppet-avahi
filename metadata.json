@@ -1,6 +1,6 @@
 {
   "name": "synyx-avahi",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "author": "Florian Krupicka <krupicka@synyx.de>",
   "summary": "Install Avahi and manage mDNS configuration",
   "license": "Apache 2.0",
